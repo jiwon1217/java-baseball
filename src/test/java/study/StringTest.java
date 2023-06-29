@@ -1,18 +1,20 @@
 package study;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
-
-public class StringTest {
+class StringTest {
 
     @Test
     void split_메서드로_주어진_값을_구분() {
         String input = "1,2";
         String[] result = input.split(",");
 
-        assertThat(result).contains("2", "1");
-        assertThat(result).containsExactly("1", "2");
+        assertThat(result)
+            .contains("2", "1")
+            .containsExactly("1", "2");
     }
 
     @Test
@@ -43,8 +45,8 @@ public class StringTest {
         String input = "abc";
 
         assertThatThrownBy(() -> input.charAt(5))
-                .isInstanceOf(StringIndexOutOfBoundsException.class)
-                .hasMessageContaining("String index out of range: 5");
+            .isInstanceOf(StringIndexOutOfBoundsException.class)
+            .hasMessageContaining("String index out of range: 5");
     }
 
 }
