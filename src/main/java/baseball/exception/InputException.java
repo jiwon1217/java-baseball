@@ -1,17 +1,21 @@
 package baseball.exception;
 
+import static baseball.domain.constant.ExceptionMessage.DUPLICATE_INPUT_NUMBER;
+import static baseball.domain.constant.ExceptionMessage.INVALID_EXIT_NUMBER;
+import static baseball.domain.constant.ExceptionMessage.INVALID_INPUT_LENGTH;
+import static baseball.domain.constant.ExceptionMessage.INVALID_INPUT_TYPE;
+import static baseball.domain.constant.GameMessage.EXIT_NUMBER;
+import static baseball.domain.constant.GameMessage.RESTART_NUMBER;
+
 import java.util.Objects;
 
 public class InputException extends Exception {
 
-    public static final String INVALID_INPUT_LENGTH = "숫자를 3개 입력해야 합니다.";
-    public static final String INVALID_INPUT_TYPE = "숫자만 입력해야 합니다.";
-    public static final String DUPLICATE_INPUT_NUMBER = "중복된 수를 입력할 수 없습니다.";
-    public static final String INVALID_EXIT_NUMBER = "1 또는 2만 입력해야 합니다.";
+    public static final Integer MAX_LENGTH = 3;
 
     public static void isValidInputLength(String numbers) {
-        if (numbers == null || numbers.length() != 3) {
-            throw new IllegalArgumentException(INVALID_INPUT_LENGTH);
+        if (numbers.length() != MAX_LENGTH) {
+            throw new IllegalArgumentException(INVALID_INPUT_LENGTH.toString());
         }
     }
 
@@ -19,24 +23,25 @@ public class InputException extends Exception {
         try {
             Integer.parseInt(numbers);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_INPUT_TYPE);
+            throw new IllegalArgumentException(INVALID_INPUT_TYPE.toString());
         }
     }
 
-    public static void isNotDuplicate(String numbers) {
+    public static void isDuplicate(String numbers) {
         if (hasDuplicateNumber(numbers)) {
-            throw new IllegalArgumentException(DUPLICATE_INPUT_NUMBER);
+            throw new IllegalArgumentException(DUPLICATE_INPUT_NUMBER.toString());
         }
     }
 
     private static boolean hasDuplicateNumber(String numbers) {
-        return numbers.charAt(0) == numbers.charAt(1) || numbers.charAt(1) == numbers.charAt(2)
+        return numbers.charAt(0) == numbers.charAt(1)
+            || numbers.charAt(1) == numbers.charAt(2)
             || numbers.charAt(0) == numbers.charAt(2);
     }
 
     public static void isValidExitNumber(String numbers) {
-        if (!Objects.equals(numbers, "1") && !Objects.equals(numbers, "2")) {
-            throw new IllegalArgumentException(INVALID_EXIT_NUMBER);
+        if (!Objects.equals(numbers, RESTART_NUMBER.toString()) && !Objects.equals(numbers, EXIT_NUMBER.toString())) {
+            throw new IllegalArgumentException(INVALID_EXIT_NUMBER.toString());
         }
     }
 }

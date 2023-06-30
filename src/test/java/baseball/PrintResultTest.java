@@ -1,35 +1,40 @@
 package baseball;
 
+import static baseball.domain.constant.GameMessage.BALL;
+import static baseball.domain.constant.GameMessage.BLANK;
+import static baseball.domain.constant.GameMessage.GAME_OVER;
+import static baseball.domain.constant.GameMessage.NEW_LINE;
+import static baseball.domain.constant.GameMessage.NOTHING;
+import static baseball.domain.constant.GameMessage.STRIKE;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import baseball.domain.Judge;
-import baseball.domain.constant.JudgeMessage;
+import baseball.domain.Game;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class PrintResultTest {
 
-    Judge judge;
+    Game game;
 
     @BeforeEach
     void init() {
-        judge = new Judge();
+        game = new Game();
     }
 
     @ParameterizedTest
     @CsvSource("0, 0")
     void NOTHING_결과_출력(int strikeCount, int ballCount) {
-        assertThat(judge.getResult(strikeCount, ballCount)).isEqualTo(
-            JudgeMessage.NOTHING.toString());
+        assertThat(game.printResult(strikeCount, ballCount)).isEqualTo(
+            NOTHING.toString());
     }
 
     @ParameterizedTest
     @CsvSource("3, 0")
     void _3_STRIKE_결과_출력(int strikeCount, int ballCount) {
-        assertThat(judge.getResult(strikeCount, ballCount)).isEqualTo(
-            strikeCount + JudgeMessage.STRIKE.toString() + JudgeMessage.NEW_LINE
-                + JudgeMessage.GAME_OVER);
+        assertThat(game.printResult(strikeCount, ballCount)).isEqualTo(
+            strikeCount + STRIKE.toString() + NEW_LINE
+                + GAME_OVER);
     }
 
     @ParameterizedTest
@@ -39,9 +44,9 @@ class PrintResultTest {
         "1, 3",
     })
     void BALL_STRIKE_결과_출력(int strikeCount, int ballCount) {
-        assertThat(judge.getResult(strikeCount, ballCount)).isEqualTo(
-            ballCount + JudgeMessage.BALL.toString() + JudgeMessage.BLANK + strikeCount
-                + JudgeMessage.STRIKE);
+        assertThat(game.printResult(strikeCount, ballCount)).isEqualTo(
+            ballCount + BALL.toString() + BLANK + strikeCount
+                + STRIKE);
     }
 
     @ParameterizedTest
@@ -51,8 +56,8 @@ class PrintResultTest {
         "0, 3",
     })
     void BALL만_있을_경우_결과_출력(int strikeCount, int ballCount) {
-        assertThat(judge.getResult(strikeCount, ballCount)).isEqualTo(
-            ballCount + JudgeMessage.BALL.toString());
+        assertThat(game.printResult(strikeCount, ballCount)).isEqualTo(
+            ballCount + BALL.toString());
     }
 
     @ParameterizedTest
@@ -61,7 +66,7 @@ class PrintResultTest {
         "2, 0",
     })
     void STRIKE만_있을_경우_결과_출력(int strikeCount, int ballCount) {
-        assertThat(judge.getResult(strikeCount, ballCount)).isEqualTo(
-            strikeCount + JudgeMessage.STRIKE.toString());
+        assertThat(game.printResult(strikeCount, ballCount)).isEqualTo(
+            strikeCount + STRIKE.toString());
     }
 }

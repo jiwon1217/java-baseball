@@ -1,20 +1,19 @@
 package baseball.view;
 
-public class OutputView {
+import baseball.domain.constant.InputMessage;
 
-    public static final String INPUT_GUIDE = "숫자를 입력해주세요 : ";
-    public static final String RESTART_OR_EXIT = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
+public class OutputView {
 
     private OutputView() {
 
     }
 
     public static void printInputGuide() {
-        System.out.print(INPUT_GUIDE);
+        System.out.print(InputMessage.INPUT_GUIDE);
     }
 
     public static void printExitMessage() {
-        System.out.println(RESTART_OR_EXIT);
+        System.out.println(InputMessage.RESTART_OR_EXIT);
     }
 
     public static void printResult(String result) {

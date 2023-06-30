@@ -1,6 +1,6 @@
 package baseball.view;
 
-import static baseball.exception.InputException.isNotDuplicate;
+import static baseball.exception.InputException.isDuplicate;
 import static baseball.exception.InputException.isValidExitNumber;
 import static baseball.exception.InputException.isValidInputLength;
 import static baseball.exception.InputException.isValidInputType;
@@ -14,17 +14,16 @@ public class InputView {
     }
 
     public static String inputNumbers() {
-        String inputNumbers = Console.readLine();
-        isValidInputLength(inputNumbers);
-        isValidInputType(inputNumbers);
-        isNotDuplicate(inputNumbers);
-        return inputNumbers;
+        String numbers = Console.readLine();
+        isValidInputLength(numbers);
+        isValidInputType(numbers);
+        isDuplicate(numbers);
+        return numbers;
     }
 
-    public static String inputExitNumber() {
-        String exitNumber = Console.readLine();
-        isValidExitNumber(exitNumber);
-        return exitNumber;
+    public static String inputRestartOrExit() {
+        String number = Console.readLine();
+        isValidExitNumber(number);
+        return number;
     }
-
 }
