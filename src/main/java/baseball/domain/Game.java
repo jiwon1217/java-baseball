@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Game {
 
-    public String calculateResult(List<Integer> inputNumbers, List<Integer> randomNumbers) {
+    public String calculateResult(final List<Integer> inputNumbers, final List<Integer> randomNumbers) {
         int strikeCount = 0;
         int ballCount = 0;
 
@@ -22,15 +22,15 @@ public class Game {
         return printResult(strikeCount, ballCount);
     }
 
-    public boolean isStrike(Integer number, List<Integer> randomNumbers, int index) {
+    public boolean isStrike(final Integer number, final List<Integer> randomNumbers, final int index) {
         return Objects.equals(number, randomNumbers.get(index));
     }
 
-    public boolean isBall(Integer number, List<Integer> randomNumbers) {
+    public boolean isBall(final Integer number, final List<Integer> randomNumbers) {
         return randomNumbers.contains(number);
     }
 
-    public String printResult(int strikeCount, int ballCount) {
+    public String printResult(final int strikeCount, final int ballCount) {
         if (strikeCount == 0 && ballCount == 0) {
             return GameMessage.NOTHING.toString();
         }

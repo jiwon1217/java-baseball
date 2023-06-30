@@ -23,7 +23,7 @@ public class NumberGenerator {
         return numbers;
     }
 
-    private static void addUniqueNumber(List<Integer> numbers, int number) {
+    private static void addUniqueNumber(final List<Integer> numbers, final int number) {
         if (!numbers.contains(number)) {
             numbers.add(number);
         }

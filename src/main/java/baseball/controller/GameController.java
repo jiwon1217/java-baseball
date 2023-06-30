@@ -45,7 +45,7 @@ public class GameController {
         } while (!result.equals(game.getExitCondition()));
     }
 
-    private List<Integer> convertToList(String numbers) {
+    private List<Integer> convertToList(final String numbers) {
         return Arrays.stream(numbers.split(""))
             .mapToInt(Integer::parseInt)
             .boxed()
