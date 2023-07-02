@@ -39,9 +39,13 @@ public class InputException extends Exception {
             || numbers.charAt(0) == numbers.charAt(2);
     }
 
-    public static void isValidExitNumber(final String numbers) {
-        if (!(Objects.equals(numbers, RESTART_NUMBER.toString()) || Objects.equals(numbers, EXIT_NUMBER.toString()))) {
+    public static void isValidRestartOrExit(final String numbers) {
+        if (!(isRestartOrExitNumber(numbers))) {
             throw new IllegalArgumentException(INVALID_EXIT_NUMBER.toString());
         }
+    }
+
+    private static boolean isRestartOrExitNumber(final String number) {
+        return Objects.equals(number, RESTART_NUMBER.toString()) || Objects.equals(number, EXIT_NUMBER.toString());
     }
 }
