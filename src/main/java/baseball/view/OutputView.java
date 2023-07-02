@@ -3,11 +3,6 @@ package baseball.view;
 import baseball.domain.constant.InputMessage;
 
 public class OutputView {
-
-    private OutputView() {
-
-    }
-
     public static void printInputGuide() {
         System.out.print(InputMessage.INPUT_GUIDE);
     }

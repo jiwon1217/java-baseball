@@ -1,17 +1,13 @@
 package baseball.view;
 
 import static baseball.exception.InputException.isDuplicate;
-import static baseball.exception.InputException.isValidExitNumber;
+import static baseball.exception.InputException.isValidRestartOrExit;
 import static baseball.exception.InputException.isValidInputLength;
 import static baseball.exception.InputException.isValidInputType;
 
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
-
-    private InputView() {
-
-    }
 
     public static String inputNumbers() {
         String numbers = Console.readLine();
@@ -23,7 +19,7 @@ public class InputView {
 
     public static String inputRestartOrExit() {
         String number = Console.readLine();
-        isValidExitNumber(number);
+        isValidRestartOrExit(number);
         return number;
     }
 }

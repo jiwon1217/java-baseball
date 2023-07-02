@@ -10,10 +10,6 @@ public class NumberGenerator {
     private static final int RANDOM_UPPER_INCLUSIVE = 9;
     private static final int MAX_SIZE = 3;
 
-    private NumberGenerator() {
-
-    }
-
     public static List<Integer> generateRandomNumber() {
         List<Integer> numbers = new ArrayList<>();
         do {
