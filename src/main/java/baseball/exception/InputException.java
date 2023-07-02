@@ -40,7 +40,7 @@ public class InputException extends Exception {
     }
 
     public static void isValidExitNumber(final String numbers) {
-        if (!Objects.equals(numbers, RESTART_NUMBER.toString()) && !Objects.equals(numbers, EXIT_NUMBER.toString())) {
+        if (!(Objects.equals(numbers, RESTART_NUMBER.toString()) || Objects.equals(numbers, EXIT_NUMBER.toString()))) {
             throw new IllegalArgumentException(INVALID_EXIT_NUMBER.toString());
         }
     }
