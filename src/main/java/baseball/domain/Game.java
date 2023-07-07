@@ -1,16 +1,14 @@
 package baseball.domain;
 
 import baseball.domain.constant.GameMessage;
+
 import java.util.List;
 import java.util.Objects;
 
 public class Game {
+    private static final int STRIKE_THRESHOLD = 3;
 
-    private static final int ZERO = 0;
-    private static final int THREE = 3;
-
-    public String calculateResult(final List<Integer> inputNumbers,
-        final List<Integer> randomNumbers) {
+    public String calculateResult(List<Integer> inputNumbers, List<Integer> randomNumbers) {
         int strikeCount = 0;
         int ballCount = 0;
 
@@ -23,37 +21,38 @@ public class Game {
                 ballCount++;
             }
         }
+
         return printResult(strikeCount, ballCount);
     }
 
-    public boolean isStrike(final Integer number, final List<Integer> randomNumbers,
-        final int index) {
+    public boolean isStrike(Integer number, List<Integer> randomNumbers, int index) {
         return Objects.equals(number, randomNumbers.get(index));
     }
 
-    public boolean isBall(final Integer number, final List<Integer> randomNumbers) {
+    public boolean isBall(Integer number, List<Integer> randomNumbers) {
         return randomNumbers.contains(number);
     }
 
-    public String printResult(final int strikeCount, final int ballCount) {
-        if (strikeCount == ZERO && ballCount == ZERO) {
+    public String printResult(int strikeCount, int ballCount) {
+        if (strikeCount == 0 && ballCount == 0) {
             return GameMessage.NOTHING.toString();
         }
-        if (strikeCount == THREE) {
-            return strikeCount + GameMessage.STRIKE.toString() + GameMessage.NEW_LINE
-                + GameMessage.GAME_OVER;
+        if (strikeCount == STRIKE_THRESHOLD) {
+            return strikeCount + GameMessage.STRIKE.toString() + GameMessage.NEW_LINE +
+                GameMessage.GAME_OVER;
         }
-        if (strikeCount == ZERO) {
+        if (strikeCount == 0) {
             return ballCount + GameMessage.BALL.toString();
         }
-        if (ballCount == ZERO) {
+        if (ballCount == 0) {
             return strikeCount + GameMessage.STRIKE.toString();
         }
-        return ballCount + GameMessage.BALL.toString() + GameMessage.BLANK + strikeCount
-            + GameMessage.STRIKE;
+        return ballCount + GameMessage.BALL.toString() + GameMessage.BLANK + strikeCount +
+            GameMessage.STRIKE;
     }
 
     public String getExitCondition() {
-        return 3 + GameMessage.STRIKE.toString() + GameMessage.NEW_LINE + GameMessage.GAME_OVER;
+        return STRIKE_THRESHOLD + GameMessage.STRIKE.toString() + GameMessage.NEW_LINE +
+            GameMessage.GAME_OVER;
     }
 }
