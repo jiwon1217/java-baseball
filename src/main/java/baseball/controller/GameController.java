@@ -1,14 +1,11 @@
 package baseball.controller;
 
-import static baseball.domain.constant.GameMessage.RESTART_NUMBER;
-import static baseball.view.InputView.inputNumbers;
-import static baseball.view.InputView.inputRestartOrExit;
-import static baseball.view.OutputView.printExitMessage;
-import static baseball.view.OutputView.printInputGuide;
-import static baseball.view.OutputView.printResult;
-
 import baseball.domain.Game;
 import baseball.util.NumberGenerator;
+import baseball.domain.constant.GameMessage;
+import baseball.view.InputView;
+import baseball.view.OutputView;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -27,25 +24,25 @@ public class GameController {
     public void init() {
         do {
             start();
-            printExitMessage();
+            OutputView.printExitMessage();
         } while (isRestart());
     }
 
     public boolean isRestart() {
-        String number = inputRestartOrExit();
-        return Objects.equals(number, RESTART_NUMBER.toString());
+        String number = InputView.inputRestartOrExit();
+        return Objects.equals(number, GameMessage.RESTART_NUMBER.toString());
     }
 
     public void start() {
         List<Integer> randomNumbers = NumberGenerator.generateRandomNumber();
         do {
-            printInputGuide();
-            result = game.calculateResult(convertToList(inputNumbers()), randomNumbers);
-            printResult(result);
+            OutputView.printInputGuide();
+            result = game.calculateResult(convertToList(InputView.inputNumbers()), randomNumbers);
+            OutputView.printResult(result);
         } while (!result.equals(game.getExitCondition()));
     }
 
-    private List<Integer> convertToList(final String numbers) {
+    private List<Integer> convertToList(String numbers) {
         return Arrays.stream(numbers.split(""))
             .mapToInt(Integer::parseInt)
             .boxed()
