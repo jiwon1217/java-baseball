@@ -1,51 +1,47 @@
 package baseball.exception;
 
-import static baseball.domain.constant.ExceptionMessage.DUPLICATE_INPUT_NUMBER;
-import static baseball.domain.constant.ExceptionMessage.INVALID_EXIT_NUMBER;
-import static baseball.domain.constant.ExceptionMessage.INVALID_INPUT_LENGTH;
-import static baseball.domain.constant.ExceptionMessage.INVALID_INPUT_TYPE;
-import static baseball.domain.constant.GameMessage.EXIT_NUMBER;
-import static baseball.domain.constant.GameMessage.RESTART_NUMBER;
+import baseball.domain.constant.ExceptionMessage;
+import baseball.domain.constant.GameMessage;
 
 import java.util.Objects;
 
 public class InputException extends Exception {
+    private static final int MAX_LENGTH = 3;
 
-    public static final Integer MAX_LENGTH = 3;
-
-    public static void isValidInputLength(final String numbers) {
+    public static void isValidInputLength(String numbers) {
         if (numbers.length() != MAX_LENGTH) {
-            throw new IllegalArgumentException(INVALID_INPUT_LENGTH.toString());
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_INPUT_LENGTH.toString());
         }
     }
 
-    public static void isValidInputType(final String numbers) {
+    public static void isValidInputType(String numbers) {
         try {
             Integer.parseInt(numbers);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_INPUT_TYPE.toString());
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_INPUT_TYPE.toString());
         }
     }
 
-    public static void isDuplicate(final String numbers) {
+    public static void isDuplicate(String numbers) {
         if (hasDuplicateNumber(numbers)) {
-            throw new IllegalArgumentException(DUPLICATE_INPUT_NUMBER.toString());
+            throw new IllegalArgumentException(ExceptionMessage.DUPLICATE_INPUT_NUMBER.toString());
         }
     }
 
-    private static boolean hasDuplicateNumber(final String numbers) {
+    private static boolean hasDuplicateNumber(String numbers) {
         return numbers.charAt(0) == numbers.charAt(1)
             || numbers.charAt(1) == numbers.charAt(2)
             || numbers.charAt(0) == numbers.charAt(2);
     }
 
-    public static void isValidRestartOrExit(final String numbers) {
-        if (!(isRestartOrExitNumber(numbers))) {
-            throw new IllegalArgumentException(INVALID_EXIT_NUMBER.toString());
+    public static void isValidRestartOrExit(String numbers) {
+        if (!isRestartOrExitNumber(numbers)) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_EXIT_NUMBER.toString());
         }
     }
 
-    private static boolean isRestartOrExitNumber(final String number) {
-        return Objects.equals(number, RESTART_NUMBER.toString()) || Objects.equals(number, EXIT_NUMBER.toString());
+    private static boolean isRestartOrExitNumber(String number) {
+        return Objects.equals(number, GameMessage.RESTART_NUMBER.toString())
+            || Objects.equals(number, GameMessage.EXIT_NUMBER.toString());
     }
 }
