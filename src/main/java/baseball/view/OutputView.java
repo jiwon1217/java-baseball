@@ -11,7 +11,7 @@ public class OutputView {
         System.out.println(InputMessage.RESTART_OR_EXIT);
     }
 
-    public static void printResult(final String result) {
+    public static void printResult(String result) {
         System.out.println(result);
     }
 }
