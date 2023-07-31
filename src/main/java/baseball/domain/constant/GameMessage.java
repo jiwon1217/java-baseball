@@ -11,9 +11,9 @@ public enum GameMessage {
     RESTART_NUMBER("1"),
     EXIT_NUMBER("2");
 
-    private final String message;
+    private String message;
 
-    GameMessage(final String message) {
+    GameMessage(String message) {
         this.message = message;
     }
 

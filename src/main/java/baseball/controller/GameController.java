@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class GameController {
 
-    private final Game game;
+    private Game game;
     private String result;
 
     public GameController() {

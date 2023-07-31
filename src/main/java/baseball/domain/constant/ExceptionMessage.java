@@ -6,9 +6,9 @@ public enum ExceptionMessage {
     DUPLICATE_INPUT_NUMBER("중복된 수를 입력할 수 없습니다."),
     INVALID_EXIT_NUMBER("1 또는 2만 입력해야 합니다.");
 
-    private final String message;
+    private String message;
 
-    ExceptionMessage(final String message) {
+    ExceptionMessage(String message) {
         this.message = message;
     }
 
